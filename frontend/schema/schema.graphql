@@ -1,0 +1,60 @@
+schema {
+  query: Queries
+  mutation: Mutations
+  subscription: Subscriptions
+}
+
+""""""
+directive @defer(if: Boolean, label: String) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+type Captain {
+  shipName: String!
+}
+
+type Character {
+  connections(by: ConnectedBy!): [Character!]!
+  name: String!
+  nicknames: [String!]!
+  origin: Origin!
+  role: Role
+}
+
+enum ConnectedBy {
+  Origin
+  Ship
+}
+
+type Engineer {
+  shipName: String!
+}
+
+type Mechanic {
+  shipName: String!
+}
+
+type Mutations {
+  deleteCharacter(name: String!): Boolean!
+}
+
+enum Origin {
+  BELT
+  EARTH
+  MARS
+}
+
+type Pilot {
+  shipName: String!
+}
+
+type Queries {
+  character(name: String!): Character @deprecated(reason: "Use `characters`")
+
+  """Return all characters from a given origin"""
+  characters(origin: Origin): [Character!]!
+}
+
+union Role = Captain | Engineer | Mechanic | Pilot
+
+type Subscriptions {
+  characterDeleted: String!
+}
