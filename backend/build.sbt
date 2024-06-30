@@ -1,5 +1,5 @@
-val calibanVersion        = "2.7.2"
-val zioVersion            = "2.1.4"
+val calibanVersion        = "2.8.0"
+val zioVersion            = "2.1.5"
 val zioLoggingVersion     = "2.3.0"
 
 lazy val root = (project in file("."))
